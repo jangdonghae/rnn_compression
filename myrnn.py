@@ -71,6 +71,7 @@ class myRNN(nn.Module):
             if hidden_inits is not None:
                 kwargs["hidden_init"] = hidden_inits[i]
             rnn_cells.append(myRNNCell(in_size, hidden_size, **kwargs))
+            in_size = hidden_size
         
         self.rnncells = nn.ModuleList(rnn_cells)
         
@@ -101,6 +102,6 @@ class myRNN(nn.Module):
             hiddens.append(hx)
             i=i+1
         
-        return outputs, torch.cat(hiddens, -1)
+        return x, torch.cat(hiddens, -1)
             
                  
